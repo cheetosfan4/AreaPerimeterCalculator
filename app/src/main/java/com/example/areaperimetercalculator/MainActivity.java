@@ -37,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
     ConstraintLayout cons_j_circleView;
     TextView tv_j_computedCircle;
 
+    //--triangle--------------------
+    EditText et_j_height;
+    EditText et_j_base;
+    EditText et_j_sideTwo;
+    EditText et_j_sideThree;
+    ConstraintLayout cons_j_triangleView;
+    TextView tv_j_computedTriangle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
         et_j_radius = findViewById(R.id.et_v_radius);
         cons_j_circleView = findViewById(R.id.cons_v_circle);
         tv_j_computedCircle = findViewById(R.id.tv_v_computedValuesCircle);
+
+        //--triangle--------------------
+        et_j_height = findViewById(R.id.et_v_height);
+        et_j_base = findViewById(R.id.et_v_base);
+        et_j_sideTwo = findViewById(R.id.et_v_sideTwo);
+        et_j_sideThree = findViewById(R.id.et_v_sideThree);
+        cons_j_triangleView = findViewById(R.id.cons_v_triangle);
+        tv_j_computedTriangle = findViewById(R.id.tv_v_computedValuesTriangle);
 
         //Because we are making a simple drop down menu (spinner) that will only contain
         //strings as options, we can use a string array with the built-in array adapter
@@ -84,19 +100,26 @@ public class MainActivity extends AppCompatActivity {
                     //square
                     cons_j_squareRectView.setVisibility(View.VISIBLE);
                     cons_j_circleView.setVisibility(View.INVISIBLE);
+                    cons_j_triangleView.setVisibility(View.INVISIBLE);
                 }
                 else if(position == 1) {
                     //rectangle
                     cons_j_squareRectView.setVisibility(View.VISIBLE);
                     cons_j_circleView.setVisibility(View.INVISIBLE);
+                    cons_j_triangleView.setVisibility(View.INVISIBLE);
                 }
                 else if(position == 2) {
                     //circle
                     cons_j_circleView.setVisibility(View.VISIBLE);
                     cons_j_squareRectView.setVisibility(View.INVISIBLE);
+                    cons_j_triangleView.setVisibility(View.INVISIBLE);
                 }
                 else if(position == 3) {
                     //triangle
+                    cons_j_triangleView.setVisibility(View.VISIBLE);
+                    cons_j_squareRectView.setVisibility(View.INVISIBLE);
+                    cons_j_circleView.setVisibility(View.INVISIBLE);
+
                 }
             }
 
@@ -161,6 +184,70 @@ public class MainActivity extends AppCompatActivity {
                 setAreaAndPerimeterCircle(et_j_radius.getText().toString());
             }
         });
+        et_j_height.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setAreaAndPerimeterTriangle(et_j_height.getText().toString(), et_j_base.getText().toString(), et_j_sideTwo.getText().toString(), et_j_sideThree.getText().toString());
+            }
+        });
+        et_j_base.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setAreaAndPerimeterTriangle(et_j_height.getText().toString(), et_j_base.getText().toString(), et_j_sideTwo.getText().toString(), et_j_sideThree.getText().toString());
+            }
+        });
+        et_j_sideTwo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setAreaAndPerimeterTriangle(et_j_height.getText().toString(), et_j_base.getText().toString(), et_j_sideTwo.getText().toString(), et_j_sideThree.getText().toString());
+            }
+        });
+        et_j_sideThree.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setAreaAndPerimeterTriangle(et_j_height.getText().toString(), et_j_base.getText().toString(), et_j_sideTwo.getText().toString(), et_j_sideThree.getText().toString());
+            }
+        });
     }
 
     public void setAreaAndPerimeterSquareRect(String lengthS, String widthS) {
@@ -190,5 +277,26 @@ public class MainActivity extends AppCompatActivity {
         tv_j_computedCircle.setText("Area = " + area + "\nPerimeter = " + perimeter);
     }
 
+    public void setAreaAndPerimeterTriangle(String heightS, String baseS, String sideTwoS, String sideThreeS) {
+        double height = 0.0;
+        double base = 0.0;
+        double sideTwo = 0.0;
+        double sideThree = 0.0;
+        double area = 0.0;
+        double perimeter = 0.0;
+
+        if(!heightS.isEmpty() && !baseS.isEmpty()) {
+            height = Double.parseDouble(heightS);
+            base = Double.parseDouble(baseS);
+            area = (base * height)/2;
+        }
+        if(!baseS.isEmpty() && !sideTwoS.isEmpty() && !sideThreeS.isEmpty()) {
+            sideTwo = Double.parseDouble(sideTwoS);
+            sideThree = Double.parseDouble(sideThreeS);
+            perimeter = base + sideTwo + sideThree;
+        }
+
+        tv_j_computedTriangle.setText("Area = " + area + "\nPerimeter = " + perimeter);
+    }
 
 }
