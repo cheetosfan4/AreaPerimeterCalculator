@@ -291,6 +291,7 @@ public class MainActivity extends AppCompatActivity {
             area = (base * height)/2;
         }
         if(!baseS.isEmpty() && !sideTwoS.isEmpty() && !sideThreeS.isEmpty()) {
+            base = Double.parseDouble(baseS);
             sideTwo = Double.parseDouble(sideTwoS);
             sideThree = Double.parseDouble(sideThreeS);
             perimeter = base + sideTwo + sideThree;
